@@ -28,8 +28,8 @@
 </template>
 
 <script lang="ts">
-import { templateNameRules } from '@/rules/index'
 import Vue from 'vue'
+import { templateNameRules } from '@/rules/index'
 import { Project } from '~/domain/models/project/project'
 
 export default Vue.extend({
@@ -67,7 +67,7 @@ export default Vue.extend({
   watch: {
     async templateName(val) {
       if (val) {
-        const response = await this.$services.template.find(this.projectId, val)
+        const response = await this.$repositories.template.find(this.projectId, val)
         const field = response.toObject()
         field.taskType = this.taskType
         this.$emit('input', field)
@@ -90,7 +90,7 @@ export default Vue.extend({
 
   methods: {
     async fetchTemplateNames() {
-      this.templateNames = await this.$services.template.list(this.projectId, this.selectedTask)
+      this.templateNames = await this.$repositories.template.list(this.projectId, this.selectedTask)
     }
   }
 })

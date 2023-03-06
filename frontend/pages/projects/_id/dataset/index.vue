@@ -65,11 +65,11 @@
 </template>
 
 <script lang="ts">
+import _ from 'lodash'
+import Vue from 'vue'
 import DocumentList from '@/components/example/DocumentList.vue'
 import FormDelete from '@/components/example/FormDelete.vue'
 import FormDeleteBulk from '@/components/example/FormDeleteBulk.vue'
-import _ from 'lodash'
-import Vue from 'vue'
 import ActionMenu from '~/components/example/ActionMenu.vue'
 import AudioList from '~/components/example/AudioList.vue'
 import ImageList from '~/components/example/ImageList.vue'
@@ -144,7 +144,8 @@ export default Vue.extend({
 
   async created() {
     this.project = await this.$services.project.findById(this.projectId)
-    this.isProjectAdmin = await this.$services.member.isProjectAdmin(this.projectId)
+    const member = await this.$repositories.member.fetchMyRole(this.projectId)
+    this.isProjectAdmin = member.isProjectAdmin
   },
 
   methods: {

@@ -49,12 +49,13 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue'
 import { mdiMagnify } from '@mdi/js'
-import { DataOptions } from 'vuetify/types'
 import VueFilterDateFormat from '@vuejs-community/vue-filter-date-format'
 import VueFilterDateParse from '@vuejs-community/vue-filter-date-parse'
-import { CommentReadDTO } from '~/services/application/comment/commentData'
+import type { PropType } from 'vue'
+import Vue from 'vue'
+import { DataOptions } from 'vuetify/types'
+import { CommentItem } from '~/domain/models/comment/comment'
 Vue.use(VueFilterDateFormat)
 Vue.use(VueFilterDateParse)
 
@@ -66,12 +67,12 @@ export default Vue.extend({
       required: true
     },
     items: {
-      type: Array as PropType<CommentReadDTO[]>,
+      type: Array as PropType<CommentItem[]>,
       default: () => [],
       required: true
     },
     value: {
-      type: Array as PropType<CommentReadDTO[]>,
+      type: Array as PropType<CommentItem[]>,
       default: () => [],
       required: true
     },
@@ -92,6 +93,7 @@ export default Vue.extend({
         { text: this.$t('comments.created_at'), value: 'createdAt' },
         { text: this.$t('dataset.action'), value: 'action' },
         { text: this.$t('labels.key'), value: 'example' }
+        { text: this.$t('comments.document'), value: 'example' }
       ],
       mdiMagnify
     }
